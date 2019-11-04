@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Main Page</title>
+
+</head>
+<body>
+<table class="table">
+    <a href='/task_create' type="button" class="btn btn-primary btn-lg btn-block">Добавить новый отчет</a>
+    <thead>
+    <tr>
+        <th>Items table</th>
+    </tr>
+    <tr>
+        <th scope="col">id</th>
+        <th scope="col">name</th>
+        <th scope="col">title</th>
+        <th scope="col">text_begin</th>
+        <th scope="col">text_end</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for col in data_table %}
+        <tr>
+            <td>{{ col[0] }}</td>
+            <td><a href = "groups/{{ col[0] }}">{{ col[1] }}</a></td>
+            <td>{{ col[2] }}</td>
+            <td>{{ col[3] }}</td>
+            <td>{{ col[4] }}</td>
+            <td>
+                <form action="/delete_task/{{ col[0] }}" method="post">
+                    <button type="submit" class="btn btn-danger">Удалить</button>
+                </form>
+            </td>
+            <td>
+                <form action="/cron/{{ col[0] }}" method="post">
+                    <button type="submit" class="btn btn-danger">Рассписание</button>
+                </form>
+            </td>
+            <td>
+                <form action="/emails/{{ col[0] }}" method="post">
+                    <button type="submit" class="btn btn-danger">Почтовые ящики</button>
+                </form>
+            </td>
+            <td>
+                <form action="/send/{{ col[0] }}" method="post">
+                    <button type="submit" class="btn btn-danger">Отправить </button>
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>

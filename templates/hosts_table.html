@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>hosts</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<table class="table">
+    <a href='/hosts_add/{{ task }}/{{ group }}/{{ name }}' type="button" class="btn btn-primary btn-lg btn-block">Добавить хосты</a>
+    <thead>
+    <tr>
+        <th>hosts table</th>
+    </tr>
+    <tr>
+        <th scope="col">id</th>
+
+        <th scope="col">name</th>
+        <th scope="col">comment</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for col in data_table %}
+    <tr>
+        <td>{{ col[0] }}</td>
+        <td><a href = "/items/{{ task }}/{{ group }}/{{ col[0] }}/{{ name }}/{{ col[1] }}">{{ col[1] }}</a></td>
+        <td>{{ col[2] }}</td>
+
+
+        <td>
+            <form action="/delete_host/{{ task }}/{{ group }}/{{ col[1] }}/{{ col[0] }}" method="post">
+                <button type="submit" class="btn btn-danger">Удалить</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<a href = '/' type="button" class="btn btn-outline-secondary">Back</a>
+</body>
+</html>
